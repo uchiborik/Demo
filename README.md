@@ -11,5 +11,5 @@
 https://remix.ethereum.org/
 
 <div align="center">
-<img width="622" alt="画像" src="https://user-images.githubusercontent.com/26053360/90517805-dbfc8d80-e1a0-11ea-9ebe-9d5f9f80c6a9.png">  
+<img width="380" alt="スクリーンショット 2020-11-24 15 19 58" src="https://user-images.githubusercontent.com/26053360/100056319-d500ad80-2e68-11eb-9fb5-5952646a840b.png"> 
 </div>
