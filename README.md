@@ -11,7 +11,7 @@
 https://remix.ethereum.org/
 
 ### ファイル追加
-Demo.solとDemoToken.sol
+Demo.solとDemoToken.solを追加する
 
 <div align="center">
 <img width="372" alt="スクリーンショット 2020-11-24 15 23 15" src="https://user-images.githubusercontent.com/26053360/100056561-34f75400-2e69-11eb-9216-3e15d8bf0cd0.png">
@@ -24,3 +24,7 @@ version^0.6.12
 <div align="center">
 <img width="380" alt="スクリーンショット 2020-11-24 15 19 58" src="https://user-images.githubusercontent.com/26053360/100056319-d500ad80-2e68-11eb-9fb5-5952646a840b.png"> 
 </div>
+
+Demo.solをコンパイルする
+
+### コントラクト実行
