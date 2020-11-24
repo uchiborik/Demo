@@ -20,11 +20,11 @@ Demo.solとDemoToken.solを追加する
 
 ### コンパイラ指定
 version^0.6.12
+Demo.solをコンパイルする
 
 <div align="center">
 <img width="380" alt="スクリーンショット 2020-11-24 15 19 58" src="https://user-images.githubusercontent.com/26053360/100056319-d500ad80-2e68-11eb-9fb5-5952646a840b.png"> 
 </div>
 
-Demo.solをコンパイルする
 
 ### コントラクト実行
