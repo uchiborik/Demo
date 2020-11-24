@@ -19,7 +19,7 @@ Demo.solとDemoToken.solを追加する
 
 
 ### コンパイラ指定
-version^0.6.12
+version^0.6.12</br>
 Demo.solをコンパイルする
 
 <div align="center">
