@@ -9,3 +9,7 @@
 
 ## Remix IDEを用いる
 https://remix.ethereum.org/
+
+<div align="center">
+<img width="622" alt="画像" src="https://user-images.githubusercontent.com/26053360/90517805-dbfc8d80-e1a0-11ea-9ebe-9d5f9f80c6a9.png">  
+</div>
