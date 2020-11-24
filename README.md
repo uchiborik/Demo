@@ -11,10 +11,11 @@
 https://remix.ethereum.org/
 
 ### ファイル追加
-Demo.sol
-DemoToken.sol
+Demo.solとDemoToken.sol
 
-
+<div align="center">
+<img width="372" alt="スクリーンショット 2020-11-24 15 23 15" src="https://user-images.githubusercontent.com/26053360/100056561-34f75400-2e69-11eb-9216-3e15d8bf0cd0.png">
+</div>
 
 
 
