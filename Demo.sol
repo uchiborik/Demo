@@ -6,7 +6,14 @@ import "./DemoToken.sol";
 
 // デモ用
 contract Demo is DemoToken{
-    // constructor() public{}
+    constructor() public{
+        createTag(10,10);
+        createTag(11,11);
+        createTag(12,12);
+        createTag(13,13);
+        createTag(14,14);
+        
+    }
     
     event NewTag(uint tagId, uint latitude, uint longitude); // イベントを定義
     
@@ -23,13 +30,12 @@ contract Demo is DemoToken{
     mapping (address => uint) ownerTagCount; // オーナー(ユーザアカウント)のタグ所有数
     
     // タグを登録する
-    function createTag(uint _latitude, uint _longitude) public returns(uint) {
+    function createTag(uint _latitude, uint _longitude) public {
         tags.push(Tag({latitude: _latitude, longitude: _longitude}));
-        uint tagId = tags.length;       // 1からスタート   ※tagId=0には値が入らない
+        uint tagId = tags.length -1;
         tagToOwner[tagId] = msg.sender;
         ownerTagCount[msg.sender]++;
         emit NewTag(tagId, _latitude, _longitude);
-        return tagId;
     }
     
     // 発見者(他ユーザ)が
@@ -39,13 +45,11 @@ contract Demo is DemoToken{
     // 紛失物の情報が提供されると、
     // 即時にタグの情報が更新され、トークン報酬が支払われる
     function changePostion(uint _tagId,uint _newlatitude, uint _newlongitude) external {
-        require(msg.sender != tagToOwner[_tagId -1]);   // タグIDと整合性を保つため、 _tagIdから-1している
-        tags[_tagId - 1].latitude = _newlatitude;
-        tags[_tagId - 1].longitude = _newlongitude;
-        _transferToken(tagToOwner[_tagId -1],msg.sender,100); // タグの持ち主から発見者へトークン報酬を与える
-        //_transferToken(msg.sender,tagToOwner[_tagId-1],1 * 10^18);
-        //_transferToken(0xAb8483F64d9C6d1EcF9b849Ae677dD3315835cb2,msg.sender,1);
-        
+        require(msg.sender != tagToOwner[_tagId]);   // タグIDと整合性を保つため、 _tagIdから-1している
+        tags[_tagId].latitude = _newlatitude;
+        tags[_tagId].longitude = _newlongitude;
+        _transferToken(tagToOwner[_tagId],msg.sender,10); // タグの持ち主から発見者へトークン報酬を与える
+
      }
     
     // 所有するタグ情報を取得する
@@ -65,7 +69,7 @@ contract Demo is DemoToken{
     
     // タグIDにより、登録されているタグの位置情報を取得する
     function getTagsById(uint _tagId) public view returns(uint, uint){ 
-         return (tags[_tagId -1 ].latitude,tags[_tagId -1 ].longitude);  // タグIDと整合性を保つため、 _tagIdから-1している
+         return (tags[_tagId].latitude,tags[_tagId].longitude);  // タグIDと整合性を保つため、 _tagIdから-1している
      }
     
 }
