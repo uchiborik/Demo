@@ -5,7 +5,7 @@ pragma solidity >=0.4.22 <0.7.0;
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
 // デモ用トークン
 contract DemoToken is ERC20{
-  uint public INITIAL_SUPPLY = 100000000;
+  uint public INITIAL_SUPPLY = 10000;
   uint public AMOUNT = 100;
   constructor() public ERC20("DemoToken", "DT"){
     _mint(msg.sender, INITIAL_SUPPLY);  // コントラクト発行アカウント
