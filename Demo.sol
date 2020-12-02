@@ -7,11 +7,8 @@ import "./DemoToken.sol";
 // デモ用
 contract Demo is DemoToken{
     constructor() public{
-        createTag(10,10);
-        createTag(11,11);
-        createTag(12,12);
-        createTag(13,13);
-        createTag(14,14);
+        createTag(1,1); //タグ1
+        createTag(11,11); //タグ2
         
     }
     
@@ -24,7 +21,21 @@ contract Demo is DemoToken{
         uint longitude;
     }
     
-    Tag[] tags; // 配列化
+    
+    // 構造体 {紛失物情報}
+  struct Footprint {
+    uint latitude;
+    uint longitude;
+    address sender;
+  } 
+  
+  
+    // デバイスIDで紛失物情報を検索するため
+    // デバイスIDから提供された紛失情報へマッピングする
+    mapping(uint => Footprint[]) public footprints;
+    
+    
+    Tag[] tags; // 登録されたタグのリスト
     
     mapping (uint => address) public tagToOwner; // タグの所有者
     mapping (address => uint) ownerTagCount; // オーナー(ユーザアカウント)のタグ所有数
@@ -38,19 +49,32 @@ contract Demo is DemoToken{
         emit NewTag(tagId, _latitude, _longitude);
     }
     
-    // 発見者(他ユーザ)が
+
+    // 持ち主が
     // タグの位置情報を更新する
-    
-    //  一対一
-    // 紛失物の情報が提供されると、
-    // 即時にタグの情報が更新され、トークン報酬が支払われる
     function changePostion(uint _tagId,uint _newlatitude, uint _newlongitude) external {
-        require(msg.sender != tagToOwner[_tagId]);   // タグIDと整合性を保つため、 _tagIdから-1している
+        require(msg.sender == tagToOwner[_tagId]);
         tags[_tagId].latitude = _newlatitude;
         tags[_tagId].longitude = _newlongitude;
-        _transferToken(tagToOwner[_tagId],msg.sender,10); // タグの持ち主から発見者へトークン報酬を与える
 
      }
+    
+    // 紛失物の情報を提供する
+    function sendPosition(uint _tagId, uint _latitude, uint _longitude) public {
+        require(msg.sender != tagToOwner[_tagId]); //タグの持ち主でないことを確認
+        footprints[_tagId].push(Footprint({latitude: _latitude, longitude: _longitude, sender: msg.sender}));
+    }
+    
+     
+    // 提供された最新の紛失物情報をタグの情報として登録する
+  function registerPostion(uint _tagId) public returns(bool) {
+        require(msg.sender == tagToOwner[_tagId]);
+        tags[_tagId].latitude = footprints[_tagId][footprints[_tagId].length - 1].latitude; //最新の緯度
+        tags[_tagId].latitude = footprints[_tagId][footprints[_tagId].length - 1].latitude; //最新の経度
+        _transferToken(msg.sender,footprints[_tagId][footprints[_tagId].length - 1].sender,10); // タグの持ち主から発見者へトークン報酬を与える
+        return true;
+  }
+ 
     
     // 所有するタグ情報を取得する
     // getter関数(view)はgasを利用しない
@@ -67,9 +91,22 @@ contract Demo is DemoToken{
         return result;
     }
     
+    // // 所有するタグの紛失物情報を取得する
+    // function getFootprintsById(uint _tagId,uint _owner) external view returns(Footprint[] memory) {
+    //     Footprint[] memory result = new footprints[_tagId];
+    //     uint counter = 0;
+    //     for (uint i = 0; i < footprints[_tagId].length; i++) {
+    //             result[counter] = i;
+    //             counter++;
+    //     }
+    //     return result;
+    // }
+    
+    
+    
     // タグIDにより、登録されているタグの位置情報を取得する
     function getTagsById(uint _tagId) public view returns(uint, uint){ 
-         return (tags[_tagId].latitude,tags[_tagId].longitude);  // タグIDと整合性を保つため、 _tagIdから-1している
+         return (tags[_tagId].latitude,tags[_tagId].longitude); 
      }
     
 }
