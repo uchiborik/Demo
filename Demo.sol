@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.4.22 < 0.7.0;
-// コンパイラのversionを指定する
-// 0.6.12を想定{version 6の中で最新なもの。ライブラリ(openzeppelin)のversionに依存する}
+// 0.6.12を想定
+
 import "./DemoToken.sol";
 
 // デモ用
@@ -14,7 +14,6 @@ contract Demo is DemoToken{
     
     event NewTag(uint tagId, uint latitude, uint longitude); // イベントを定義
     
-    // 状態変数 BC上に保存される
     // 構造体 {タグ情報}
     struct Tag{
         uint latitude;
@@ -63,6 +62,7 @@ contract Demo is DemoToken{
     function sendPosition(uint _tagId, uint _latitude, uint _longitude) public {
         require(msg.sender != tagToOwner[_tagId]); //タグの持ち主でないことを確認
         footprints[_tagId].push(Footprint({latitude: _latitude, longitude: _longitude, sender: msg.sender}));
+        _transferToken(0x5B38Da6a701c568545dCfcB03FcB875f56beddC4,msg.sender,1); // 提供者へ報酬を得る
     }
     
      
@@ -70,11 +70,10 @@ contract Demo is DemoToken{
   function registerPostion(uint _tagId) public returns(bool) {
         require(msg.sender == tagToOwner[_tagId]);
         tags[_tagId].latitude = footprints[_tagId][footprints[_tagId].length - 1].latitude; //最新の緯度
-        tags[_tagId].latitude = footprints[_tagId][footprints[_tagId].length - 1].latitude; //最新の経度
-        _transferToken(msg.sender,footprints[_tagId][footprints[_tagId].length - 1].sender,10); // タグの持ち主から発見者へトークン報酬を与える
+        tags[_tagId].longitude = footprints[_tagId][footprints[_tagId].length - 1].longitude; //最新の経度
+        _transferToken(msg.sender,footprints[_tagId][footprints[_tagId].length - 1].sender,10); // タグの持ち主は提供者へトークン報酬を払う
         return true;
   }
- 
     
     // 所有するタグ情報を取得する
     // getter関数(view)はgasを利用しない
@@ -90,10 +89,10 @@ contract Demo is DemoToken{
         }
         return result;
     }
-    
+        // @dev 実装中
     // // 所有するタグの紛失物情報を取得する
-    // function getFootprintsById(uint _tagId,uint _owner) external view returns(Footprint[] memory) {
-    //     Footprint[] memory result = new footprints[_tagId];
+    // function getFootprintsById(uint _tagId,uint _owner) external view returns(Footprint memory) {
+    //     Footprint memory result = new footprints[_tagId];
     //     uint counter = 0;
     //     for (uint i = 0; i < footprints[_tagId].length; i++) {
     //             result[counter] = i;
@@ -102,11 +101,8 @@ contract Demo is DemoToken{
     //     return result;
     // }
     
-    
-    
     // タグIDにより、登録されているタグの位置情報を取得する
     function getTagsById(uint _tagId) public view returns(uint, uint){ 
          return (tags[_tagId].latitude,tags[_tagId].longitude); 
      }
-    
 }
