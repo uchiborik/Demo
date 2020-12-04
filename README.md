@@ -5,17 +5,12 @@
 他ユーザ(送信者)によりタグの情報を変更された際に、</br>
 持ち主から他ユーザ(送信者)へトークンが移動する
 
-## Openzeppelinライブラリを用いる
-トークン発行・管理するため、ERC20.solをインポート
-
 ## Remix IDEを用いる
 https://remix.ethereum.org/#version=soljson-v0.6.12+commit.27d51765.js&optimize=false&runs=200&gist=
 
 gist ID: 2df5a5ce90de8aae462e5c5a8e0ea259
 (https://gist.github.com/uchiborik/2df5a5ce90de8aae462e5c5a8e0ea259)
 
-### ファイル追加
-BluePlatform.solとBlueToken.solを追加する
 
 <div align="center">
 <img width="372" alt="スクリーンショット 2020-11-24 15 23 15" src="https://user-images.githubusercontent.com/26053360/100056561-34f75400-2e69-11eb-9216-3e15d8bf0cd0.png">
