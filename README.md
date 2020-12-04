@@ -6,7 +6,7 @@
 持ち主から他ユーザ(送信者)へトークンが移動する
 
 ## Remix Solidity IDE
-リンク
+リンク</br>
 https://remix.ethereum.org/#version=soljson-v0.6.12+commit.27d51765.js&optimize=false&runs=200&gist= </br></br>
 IDの入力が必要 </br>
 gist ID: 2df5a5ce90de8aae462e5c5a8e0ea259 </br>
