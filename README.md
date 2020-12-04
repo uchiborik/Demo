@@ -5,9 +5,10 @@
 他ユーザ(送信者)によりタグの情報を変更された際に、</br>
 持ち主から他ユーザ(送信者)へトークンが移動する
 
-## Remix IDEを用いる
+## Remix Solidity IDE
+リンク
 https://remix.ethereum.org/#version=soljson-v0.6.12+commit.27d51765.js&optimize=false&runs=200&gist=
-
+IDの入力が必要
 gist ID: 2df5a5ce90de8aae462e5c5a8e0ea259
 (https://gist.github.com/uchiborik/2df5a5ce90de8aae462e5c5a8e0ea259)
 
