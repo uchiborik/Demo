@@ -1,15 +1,16 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.4.22 < 0.7.0;
+pragma solidity ^0.6.12;
+// pragma solidity >=0.4.22 < 0.7.0;
 // 0.6.12を想定
 
-import "./DemoToken.sol";
+import "./BlueToken.sol";
 
 // デモ用
-contract Demo is DemoToken{
+contract BluePlatform is BlueToken{
     constructor() public{
         createTag(1,1); //タグ1
         createTag(11,11); //タグ2
-        
+        createTag(11,11); //タグ2
     }
     
     event NewTag(uint tagId, uint latitude, uint longitude); // イベントを定義
@@ -20,7 +21,6 @@ contract Demo is DemoToken{
         uint longitude;
     }
     
-    
     // 構造体 {紛失物情報}
   struct Footprint {
     uint latitude;
@@ -28,11 +28,9 @@ contract Demo is DemoToken{
     address sender;
   } 
   
-  
     // デバイスIDで紛失物情報を検索するため
     // デバイスIDから提供された紛失情報へマッピングする
     mapping(uint => Footprint[]) public footprints;
-    
     
     Tag[] tags; // 登録されたタグのリスト
     
@@ -48,14 +46,12 @@ contract Demo is DemoToken{
         emit NewTag(tagId, _latitude, _longitude);
     }
     
-
     // 持ち主が
     // タグの位置情報を更新する
     function changePostion(uint _tagId,uint _newlatitude, uint _newlongitude) external {
         require(msg.sender == tagToOwner[_tagId]);
         tags[_tagId].latitude = _newlatitude;
         tags[_tagId].longitude = _newlongitude;
-
      }
     
     // 紛失物の情報を提供する
