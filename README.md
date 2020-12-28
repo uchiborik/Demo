@@ -23,8 +23,14 @@ BluePlatform.solを選択し、コンパイルする
 
 ### コントラクト実行
 - createTag
+スマートタグの新規登録
 - sendPostion
+(他)ユーザがスマートタグの電波を受信した時に位置情報を送信する
 - changePostion
+持ち主がスマートタグを携帯したまま移動している時、位置情報を更新する
 - registerPostion
+他ユーザから提供された位置情報を受信し、スマートタグの位置情報を更新する
 - getTagsByOwner
+持ち主のアドレスを利用して所有するタグIDを取得する
 - getTagsById
+タグIDを入力してタグの位置情報を取得する
